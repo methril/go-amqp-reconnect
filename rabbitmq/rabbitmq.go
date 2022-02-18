@@ -8,7 +8,7 @@ import (
 
 	"sync/atomic"
 
-	"github.com/streadway/amqp"
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 func getReconnDelay() int {
@@ -177,7 +177,7 @@ type Channel struct {
 
 // IsClosed indicate closed by developer
 func (ch *Channel) IsClosed() bool {
-	return (atomic.LoadInt32(&ch.closed) == 1)
+	return atomic.LoadInt32(&ch.closed) == 1
 }
 
 // Close ensure closed flag set
