@@ -25,9 +25,15 @@ func getReconnDelay() int {
 
 var delay = getReconnDelay() // reconnect after delay seconds
 
+type ConnectionAPI interface {
+	Channel() (*Channel, error)
+	Close() error
+}
+
 // Connection amqp.Connection wrapper
 type Connection struct {
 	*amqp.Connection
+	ConnectionAPI
 }
 
 // Channel wrap amqp.Connection.Channel, get a auto reconnect channel
